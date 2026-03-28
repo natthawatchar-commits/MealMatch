@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MealMatch – More</title>
+  <link rel="stylesheet" href="../layout.css">
+  <link rel="stylesheet" href="more.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <span class="topbar-title">More <span class="topbar-dots">···</span></span>
+    </header>
+
+    <main class="page-body">
+
+      <!-- PROFILE CARD -->
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">U</div>
+        <div class="profile-info">
+          <p class="profile-name" id="profileName">Loading...</p>
+          <p class="profile-email" id="profileEmail"></p>
+        </div>
+        <i class="fas fa-chevron-right profile-arrow"></i>
+      </div>
+
+      <!-- STATS ROW -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fas fa-snowflake"></i></div>
+          <div class="stat-n" id="statIng">0</div>
+          <div class="stat-l">Ingredients</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber"><i class="fas fa-cart-shopping"></i></div>
+          <div class="stat-n" id="statShop">0</div>
+          <div class="stat-l">To Buy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red"><i class="fas fa-heart"></i></div>
+          <div class="stat-n" id="statFav">0</div>
+          <div class="stat-l">Favorites</div>
+        </div>
+      </div>
+
+      <!-- MY DATA -->
+      <p class="group-label">MY DATA</p>
+      <div class="menu-group">
+        <a href="../inventory/inventory.html" class="menu-row">
+          <div class="menu-row-icon purple"><i class="fas fa-chart-bar"></i></div>
+          <div class="menu-row-info">
+            <span class="menu-row-title">Stock</span>
+            <span class="menu-row-sub" id="stockSub">0 items tracked</span>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+        <a href="../favorite/favorite.html" class="menu-row">
+          <div class="menu-row-icon red"><i class="fas fa-heart"></i></div>
+          <div class="menu-row-info">
+            <span class="menu-row-title">Saved</span>
+            <span class="menu-row-sub" id="savedSub">0 saved recipes</span>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+        <a href="../menumatching/allmenus.html" class="menu-row">
+          <div class="menu-row-icon blue"><i class="fas fa-book-open"></i></div>
+          <div class="menu-row-info">
+            <span class="menu-row-title">Recipes</span>
+            <span class="menu-row-sub">Browse all recipes</span>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+      </div>
+
+      <!-- APP -->
+      <p class="group-label">APP</p>
+      <div class="menu-group">
+
+        <a href="../contact/contactus.html" class="menu-row">
+          <div class="menu-row-icon blue"><i class="fas fa-circle-question"></i></div>
+          <div class="menu-row-info">
+            <span class="menu-row-title">Help &amp; Support</span>
+            <span class="menu-row-sub">FAQ &amp; contact us</span>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+
+        <a href="about.html" class="menu-row">
+          <div class="menu-row-icon gray"><i class="fas fa-circle-info"></i></div>
+          <div class="menu-row-info">
+            <span class="menu-row-title">About MealMatch</span>
+            <span class="menu-row-sub">Version 1.0 · Tech stack</span>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+
+      </div>
+
+      <!-- SIGN OUT -->
+      <button class="signout-btn" id="signoutBtn">
+        <i class="fas fa-right-from-bracket"></i> Sign Out
+      </button>
+
+      <div style="height:90px"></div>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bnav">
+      <a href="../mainmenu/mainmenu.html" class="bnav-item"><i class="fas fa-house"></i><span>Home</span></a>
+      <a href="../myfridge/myfridge.html" class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+      <a href="../menumatching/menumatching.html" class="bnav-item"><i
+          class="fas fa-utensils"></i><span>Match</span></a>
+      <a href="../shoplist/shoplist.html" class="bnav-item"><i
+          class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+      <a href="../mainmenu/more.html" class="bnav-item active"><i class="fas fa-ellipsis"></i><span>More</span></a>
+    </nav>
+
+  </div>
+  <script type="module" src="more.js"></script>
+</body>
+
+</html>

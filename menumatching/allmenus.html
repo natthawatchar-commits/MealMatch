@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – Browse</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="allmenus.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <header class="topbar">
+    <a href="../mainmenu/mainmenu.html" class="topbar-back">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">Browse</span>
+      <span class="topbar-sub" id="browseSub">All recipes</span>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <i class="fas fa-magnifying-glass"></i>
+      <input type="text" id="menuSearch" placeholder="Search recipes..." oninput="searchMenu()">
+    </div>
+  </div>
+
+  <main class="page-body">
+    <div class="menu-grid" id="menuList"></div>
+    <div id="loadMoreWrap"></div>
+    <div style="height:90px"></div>
+  </main>
+
+  <nav class="bnav">
+    <a href="../mainmenu/mainmenu.html"         class="bnav-item"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html"         class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html" class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html"         class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../menumatching/allmenus.html"     class="bnav-item active"><i class="fas fa-book-open"></i><span>Recipes</span></a>
+  </nav>
+
+</div>
+<script src="allmenus.js"></script>
+</body>
+</html>

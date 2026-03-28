@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – Saved</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="favorite.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a href="../mainmenu/mainmenu.html" class="topbar-back">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">Saved</span>
+      <span class="topbar-sub">Your saved recipes &amp; ingredients</span>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" id="tabRecipes" onclick="switchTab('recipes')">
+      <i class="fas fa-utensils"></i> Recipes
+      <span class="tab-count" id="cntRecipes">0</span>
+    </button>
+    <button class="tab" id="tabIngredients" onclick="switchTab('ingredients')">
+      <i class="fas fa-carrot"></i> Ingredients
+      <span class="tab-count" id="cntIngredients">0</span>
+    </button>
+  </div>
+
+  <main class="page-body">
+
+    <!-- ── RECIPES TAB ── -->
+    <div id="panelRecipes">
+      <!-- add recipe bar -->
+      <div class="add-bar">
+        <div class="ingredient-wrapper">
+          <div class="search-box">
+            <i class="fas fa-plus"></i>
+            <input type="text" id="recipeInput"
+                   placeholder="Search & add recipe..."
+                   oninput="searchRecipeFavorite()" autocomplete="off">
+          </div>
+          <div id="recipeSuggestionBox" class="suggestion-box"></div>
+        </div>
+      </div>
+
+      <div id="recipeList">
+        <div class="empty-state" id="recipeEmpty">
+          <i class="fas fa-heart"></i>
+          <p>No saved recipes yet</p>
+          <span>Search above or heart a recipe from Discover</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INGREDIENTS TAB ── -->
+    <div id="panelIngredients" style="display:none">
+
+      <!-- add ingredient bar -->
+      <div class="add-bar">
+        <div class="ingredient-wrapper">
+          <div class="search-box">
+            <i class="fas fa-plus"></i>
+            <input type="text" id="favoriteInput"
+                   placeholder="Search & add ingredient..."
+                   oninput="searchFavorite()" autocomplete="off">
+          </div>
+          <div id="suggestionBox" class="suggestion-box"></div>
+        </div>
+      </div>
+
+      <div id="ingredientList">
+        <div class="empty-state" id="ingredientEmpty">
+          <i class="fas fa-carrot"></i>
+          <p>No saved ingredients yet</p>
+          <span>Search above to add one</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:90px"></div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bnav">
+    <a href="../mainmenu/mainmenu.html"         class="bnav-item"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html"         class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html" class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html"         class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../menumatching/allmenus.html"     class="bnav-item"><i class="fas fa-book-open"></i><span>Recipes</span></a>
+  </nav>
+
+</div>
+<script src="favorite.js"></script>
+</body>
+</html>

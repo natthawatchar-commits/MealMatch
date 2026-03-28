@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="mainmenu.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-icon"><i class="fas fa-utensils"></i></div>
+      <span class="topbar-name">MealMatch</span>
+    </div>
+    <button class="topbar-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
+  </header>
+
+  <!-- HERO CARD (rounded, inside padding) -->
+  <div class="hero-wrap">
+    <section class="hero-card">
+      <div class="hero-bg-blob b1"></div>
+      <div class="hero-bg-blob b2"></div>
+      <p class="hero-date" id="heroDate"></p>
+      <h1 class="hero-greeting" id="heroGreeting">Hello!</h1>
+      <p class="hero-sub"   id="heroSub">Loading...</p>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-n"><span id="statIngredients">0</span><span class="hstat-max">/16</span></div>
+          <div class="hstat-l">Ingredients</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n hstat-warn" id="statExpiring">0</div>
+          <div class="hstat-l">Expiring</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n" id="statRecipes">—</div>
+          <div class="hstat-l">Top Match</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SCROLLABLE CONTENT -->
+  <main class="page-body">
+
+    <!-- MAIN MENU GRID -->
+    <section class="block">
+      <p class="block-label">MAIN MENU</p>
+      <div class="menu-grid">
+        <a href="../myfridge/myfridge.html"          class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-snowflake"></i></div><span>My Fridge</span></a>
+        <a href="../favorite/favorite.html"           class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-bookmark"></i></div><span>Saved</span></a>
+        <a href="../menumatching/menumatching.html"   class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-wand-magic-sparkles"></i></div><span>Discover</span></a>
+        <a href="../inventory/inventory.html"         class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-chart-bar"></i></div><span>Stock</span></a>
+        <a href="../shoplist/shoplist.html"           class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-cart-shopping"></i></div><span>Shopping</span></a>
+        <a href="../menumatching/allmenus.html"       class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-book-open"></i></div><span>Recipes</span></a>
+      </div>
+    </section>
+
+    <!-- EXPIRING SOON -->
+    <section class="block">
+      <div class="block-header">
+        <p class="block-label">EXPIRING SOON</p>
+        <a href="../inventory/inventory.html" class="block-link">See all</a>
+      </div>
+      <div class="expire-row-wrap" id="expireRowWrap">
+        <div class="expire-empty" id="expiringEmpty"><i class="fas fa-circle-check"></i> Everything's fresh</div>
+      </div>
+    </section>
+
+    <!-- QUICK ACCESS -->
+    <section class="block">
+      <p class="block-label">QUICK ACCESS</p>
+      <div class="qa-grid">
+        <a href="../myfridge/myfridge.html"        class="qa-card qa-blue">
+          <div class="qa-icon"><i class="fas fa-plus"></i></div>
+          <div><p class="qa-title">Add Ingredient</p><p class="qa-sub" id="fridgeSlots">0/16 slots used</p></div>
+        </a>
+        <a href="../menumatching/menumatching.html" class="qa-card qa-amber">
+          <div class="qa-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div><p class="qa-title">What to Cook?</p><p class="qa-sub">Match from your fridge</p></div>
+        </a>
+        <a href="../shoplist/shoplist.html"         class="qa-card qa-green">
+          <div class="qa-icon"><i class="fas fa-clipboard-list"></i></div>
+          <div><p class="qa-title">Buy List</p><p class="qa-sub" id="shopCount">0 items pending</p></div>
+        </a>
+        <a href="../inventory/inventory.html"       class="qa-card qa-purple">
+          <div class="qa-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div><p class="qa-title">Check Expiry</p><p class="qa-sub" id="inventoryCount">0 items tracked</p></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- TODAY'S PICK -->
+    <section class="block" id="todaySection" style="display:none">
+      <p class="block-label">TODAY'S PICK</p>
+      <div id="todaysPick"></div>
+    </section>
+
+    <div style="height:96px"></div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bnav">
+    <a href="../mainmenu/mainmenu.html"          class="bnav-item active"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html"          class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html"  class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html"          class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../mainmenu/more.html"              class="bnav-item"><i class="fas fa-ellipsis"></i><span>More</span></a>
+  </nav>
+
+</div><!-- end app-shell -->
+
+<script type="module" src="mainmenu.js"></script>
+</body>
+</html>

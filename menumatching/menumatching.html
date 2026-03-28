@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – Discover</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="menumatching.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a href="../mainmenu/mainmenu.html" class="topbar-back">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">Discover</span>
+      <span class="topbar-sub" id="discoverSub">Loading your fridge...</span>
+    </div>
+    <a href="allmenus.html" class="topbar-action" title="Browse all recipes">
+      <i class="fas fa-compass"></i>
+    </a>
+  </header>
+
+  <!-- FRIDGE CHIPS -->
+  <div class="chips-wrap" id="fridgeChips"></div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <i class="fas fa-magnifying-glass"></i>
+      <input type="text" id="menuSearch" placeholder="Search recipes..." oninput="searchMenu()">
+    </div>
+  </div>
+
+  <!-- RESULTS INFO -->
+  <div class="results-info" id="resultsInfo"></div>
+
+  <!-- MENU LIST -->
+  <main class="page-body">
+    <div id="menuList"></div>
+    <div id="loadMoreWrap"></div>
+    <div style="height:90px"></div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bnav">
+    <a href="../mainmenu/mainmenu.html"         class="bnav-item"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html"         class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html" class="bnav-item active"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html"         class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../menumatching/allmenus.html"     class="bnav-item"><i class="fas fa-book-open"></i><span>Recipes</span></a>
+  </nav>
+
+</div>
+<script type="module" src="menumatching.js"></script>
+</body>
+</html>

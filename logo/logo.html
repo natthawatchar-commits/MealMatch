@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>MealMatch Logo</title>
+</head>
+<body style="background:#ffffff; display:flex; justify-content:center; align-items:center; height:100vh;">
+
+<svg width="500" height="500" viewBox="0 0 500 500">
+
+  <defs>
+    <!-- ตู้เย็น gradient -->
+    <linearGradient id="fridgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6BB6FF"/>
+      <stop offset="100%" stop-color="#2F80ED"/>
+    </linearGradient>
+
+    <!-- เงา -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- วงกลมเส้นดำบาง -->
+  <circle cx="250" cy="250" r="220" fill="white" stroke="black" stroke-width="3"/>
+
+  <!-- ตู้เย็น -->
+  <g filter="url(#shadow)">
+    <rect x="200" y="160" width="100" height="180" rx="20" fill="url(#fridgeGrad)"/>
+  </g>
+
+  <!-- เส้นแบ่ง -->
+  <line x1="200" y1="240" x2="300" y2="240" stroke="white" stroke-width="4"/>
+
+  <!-- มือจับ -->
+  <rect x="280" y="190" width="10" height="30" rx="4" fill="white"/>
+  <rect x="280" y="260" width="10" height="30" rx="4" fill="white"/>
+
+  <!-- จาน -->
+  <ellipse cx="250" cy="150" rx="70" ry="18" fill="#d9d9d9"/>
+  <ellipse cx="250" cy="145" rx="60" ry="14" fill="#ffffff"/>
+
+  <!-- อาหาร -->
+  <circle cx="225" cy="140" r="10" fill="#F2994A"/>
+  <circle cx="250" cy="138" r="10" fill="#27AE60"/>
+  <circle cx="275" cy="140" r="10" fill="#EB5757"/>
+
+  <!-- ส้อม -->
+  <g transform="rotate(-35 210 340)" filter="url(#shadow)">
+    <rect x="205" y="300" width="12" height="90" rx="6" fill="#E0E0E0"/>
+    <rect x="198" y="300" width="4" height="25" fill="#E0E0E0"/>
+    <rect x="205" y="300" width="4" height="25" fill="#E0E0E0"/>
+    <rect x="212" y="300" width="4" height="25" fill="#E0E0E0"/>
+  </g>
+
+  <!-- ช้อน -->
+  <g transform="rotate(35 290 340)" filter="url(#shadow)">
+    <rect x="285" y="300" width="12" height="90" rx="6" fill="#E0E0E0"/>
+    <ellipse cx="291" cy="290" rx="18" ry="25" fill="#E0E0E0"/>
+  </g>
+
+</svg>
+
+</body>
+</html>

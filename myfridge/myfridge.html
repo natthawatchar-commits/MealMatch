@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – My Fridge</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="myfridge.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a href="../mainmenu/mainmenu.html" class="topbar-back">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">My Fridge</span>
+      <span class="topbar-sub" id="slotLabel">0/16 slots used</span>
+    </div>
+    <button class="topbar-add" onclick="openModal()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </header>
+
+  <!-- SEARCH BAR -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <i class="fas fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="Search ingredient..." oninput="filterItems()">
+    </div>
+  </div>
+
+  <!-- FRIDGE GRID -->
+  <main class="page-body">
+
+    <!-- SLOT USAGE BAR -->
+    <div class="usage-bar-wrap">
+      <div class="usage-bar-track">
+        <div class="usage-bar-fill" id="usageBarFill"></div>
+      </div>
+      <span class="usage-label" id="usageLabel">0 / 16</span>
+    </div>
+
+    <!-- 4×4 GRID -->
+    <div class="fridge-grid" id="inventoryGrid"></div>
+
+    <!-- FULL BANNER (hidden until full) -->
+    <div class="full-banner" id="fullBanner" style="display:none">
+      <i class="fas fa-box-archive"></i>
+      <span>Fridge full — <a href="../inventory/inventory.html">manage in Stock</a></span>
+    </div>
+
+    <!-- DETAIL LIST -->
+    <div class="detail-section">
+      <p class="block-label">ALL ITEMS</p>
+      <div id="itemDetailList"></div>
+    </div>
+
+    <div style="height:90px"></div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bnav">
+    <a href="../mainmenu/mainmenu.html"         class="bnav-item"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html"         class="bnav-item active"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html" class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html"         class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../menumatching/allmenus.html"     class="bnav-item"><i class="fas fa-book-open"></i><span>Recipes</span></a>
+  </nav>
+
+</div>
+
+<!-- ===== ADD MODAL ===== -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Add Ingredient</h3>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <div class="ingredient-wrapper">
+      <label class="field-label">Ingredient name *</label>
+      <input type="text" id="itemName" placeholder="e.g. chicken, tomato..."
+             autocomplete="off" oninput="suggestIngredient()">
+      <div id="ingredientSuggestions"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Quantity *</label>
+        <input type="number" id="itemQty" placeholder="0">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Unit</label>
+        <select id="itemUnit">
+          <option value="pcs">pcs</option>
+          <option value="kg">kg</option>
+          <option value="g">g</option>
+          <option value="L">L</option>
+          <option value="ml">ml</option>
+          <option value="tbsp">tbsp</option>
+          <option value="tsp">tsp</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Expiry date</label>
+      <input type="date" id="itemExpire">
+    </div>
+
+
+
+    <button class="submit-btn" onclick="addItem()">
+      <i class="fas fa-plus"></i> Add to Fridge
+    </button>
+  </div>
+</div>
+
+<!-- ===== ITEM POPUP ===== -->
+<div class="modal-overlay" id="itemModal">
+  <div class="modal-box item-popup">
+    <button class="modal-close" onclick="closeItemModal()"><i class="fas fa-xmark"></i></button>
+    <div id="popupIcon" class="popup-img"></div>
+    <h3 id="popupName" class="popup-name"></h3>
+
+    <div class="qty-control">
+      <button class="qty-btn" onclick="adjustQty(-1)"><i class="fas fa-minus"></i></button>
+      <div class="qty-display">
+        <input type="number" id="popupQty" onchange="updateQtyFromInput()">
+        <span id="popupUnit"></span>
+      </div>
+      <button class="qty-btn" onclick="adjustQty(1)"><i class="fas fa-plus"></i></button>
+    </div>
+
+    <button class="delete-btn" onclick="deleteItem()">
+      <i class="fas fa-trash"></i> Remove from fridge
+    </button>
+  </div>
+</div>
+
+<script type="module" src="myfridge.js"></script>
+</body>
+</html>

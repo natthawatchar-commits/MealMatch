@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – Recipe</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="menudetail.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- HERO IMAGE (full bleed) -->
+  <div class="hero-img-wrap" id="heroImgWrap">
+    <img id="mealImage" src="" alt="">
+    <div class="hero-overlay"></div>
+
+    <!-- floating back button -->
+    <a href="javascript:history.back()" class="float-back">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+
+    <!-- floating fav button -->
+    <button class="float-fav" id="favBtn" onclick="toggleFav()">
+      <i class="far fa-heart"></i>
+    </button>
+
+    <!-- category badge -->
+    <span class="hero-cat" id="mealCategory"></span>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="detail-body">
+
+    <!-- TITLE + META -->
+    <div class="detail-title-wrap">
+      <h1 class="detail-title" id="mealName"></h1>
+      <div class="detail-meta">
+        <span><i class="fas fa-clock"></i> ~30 min</span>
+        <span><i class="fas fa-users"></i> 2–4 servings</span>
+        <span id="mealArea"></span>
+      </div>
+    </div>
+
+    <!-- MATCH BAR (if from fridge) -->
+    <div class="match-section" id="matchSection" style="display:none">
+      <div class="match-bar-row">
+        <span class="match-label">Your ingredient match</span>
+        <span class="match-pct" id="matchPct"></span>
+      </div>
+      <div class="match-bar-track">
+        <div class="match-bar-fill" id="matchBarFill"></div>
+      </div>
+      <div class="match-chips" id="matchChips"></div>
+    </div>
+
+    <!-- INGREDIENTS -->
+    <section class="detail-section">
+      <h2 class="section-heading">
+        <i class="fas fa-list-ul"></i> Ingredients
+      </h2>
+      <div class="ing-grid" id="ingredientList"></div>
+    </section>
+
+    <!-- INSTRUCTIONS -->
+    <section class="detail-section">
+      <h2 class="section-heading">
+        <i class="fas fa-book-open"></i> Instructions
+      </h2>
+      <div class="instructions-text" id="instructions"></div>
+    </section>
+
+    <div style="height:40px"></div>
+  </main>
+
+</div>
+<script type="module" src="menudetail.js"></script>
+</body>
+</html>

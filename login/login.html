@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – Login</title>
+<link rel="stylesheet" href="auth.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <!-- HERO -->
+  <div class="auth-hero">
+    <div class="hero-blob b1"></div>
+    <div class="hero-blob b2"></div>
+    <div class="app-brand">
+      <div class="app-logo"><i class="fas fa-utensils"></i></div>
+      <span class="app-name">MealMatch</span>
+    </div>
+    <p class="hero-tagline">Smart fridge. Better meals.</p>
+  </div>
+
+  <!-- CARD -->
+  <div class="auth-card">
+    <h2 class="auth-title">Welcome back</h2>
+    <p class="auth-sub">Sign in to your account</p>
+
+    <form onsubmit="event.preventDefault(); login()">
+
+      <div class="field-group">
+        <label class="field-label">Email</label>
+        <div class="field-input-wrap">
+          <i class="fas fa-envelope field-icon"></i>
+          <input id="email" type="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Password</label>
+        <div class="field-input-wrap">
+          <i class="fas fa-lock field-icon"></i>
+          <input id="password" type="password" placeholder="••••••••" required>
+          <button type="button" class="toggle-pw" onclick="togglePw('password', this)">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="btnText">Sign In</span>
+        <i class="fas fa-arrow-right" id="btnIcon"></i>
+      </button>
+
+    </form>
+
+    <p class="auth-switch">
+      Don't have an account?
+      <a href="../register/register.html">Create one</a>
+    </p>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const app  = initializeApp({
+  apiKey: "AIzaSyApISz8uFOfVirU3rX7Dk9wSVVwIKwY2OM",
+  authDomain: "inventory-matching.firebaseapp.com",
+  projectId: "inventory-matching",
+  storageBucket: "inventory-matching.firebasestorage.app",
+  messagingSenderId: "758643685191",
+  appId: "1:758643685191:web:44a886c25e35d14185be62"
+});
+const auth = getAuth(app);
+
+window.login = async function () {
+  const email    = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const btn      = document.getElementById("submitBtn");
+  const btnText  = document.getElementById("btnText");
+  const errMsg   = document.getElementById("errorMsg");
+
+  errMsg.textContent = "";
+  btn.disabled = true;
+  btnText.textContent = "Signing in...";
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "../mainmenu/mainmenu.html";
+  } catch (e) {
+    errMsg.textContent = "Incorrect email or password. Please try again.";
+    btn.disabled = false;
+    btnText.textContent = "Sign In";
+  }
+};
+
+window.togglePw = function (id, btn) {
+  const input = document.getElementById(id);
+  const icon  = btn.querySelector("i");
+  if (input.type === "password") {
+    input.type = "text";
+    icon.className = "fas fa-eye-slash";
+  } else {
+    input.type = "password";
+    icon.className = "fas fa-eye";
+  }
+};
+</script>
+</body>
+</html>

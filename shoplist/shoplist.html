@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MealMatch – Shopping</title>
+<link rel="stylesheet" href="../layout.css">
+<link rel="stylesheet" href="shoplist.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <a href="../mainmenu/mainmenu.html" class="topbar-back">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">Shopping List
+        <span class="topbar-icon-inline"><i class="fas fa-cart-shopping"></i></span>
+      </span>
+      <span class="topbar-sub" id="shopSub">0 total</span>
+    </div>
+    <div class="topbar-badge" id="leftBadge" style="display:none">
+      <i class="fas fa-cart-shopping"></i>
+      <span id="leftCount">0</span> left
+    </div>
+  </header>
+
+  <!-- QUICK-ADD CHIPS (from fridge expiring soon) -->
+  <div class="chips-section" id="chipsSection" style="display:none">
+    <div class="chips-scroll" id="quickChips"></div>
+  </div>
+
+  <!-- ADD BUTTON -->
+  <div class="add-btn-wrap">
+    <button class="add-main-btn" onclick="openModal()">
+      <i class="fas fa-plus"></i> Add New Item
+    </button>
+  </div>
+
+  <!-- LIST BODY -->
+  <main class="page-body">
+
+    <!-- TO BUY -->
+    <div id="toBuySection" style="display:none">
+      <div class="section-header">
+        <span class="section-label" id="toBuyLabel">TO BUY (0)</span>
+      </div>
+      <div id="toBuyList"></div>
+    </div>
+
+    <!-- DONE -->
+    <div id="doneSection" style="display:none">
+      <div class="section-header">
+        <span class="section-label done-label" id="doneLabel">DONE (0)</span>
+        <button class="clear-btn" onclick="clearDone()">Clear all</button>
+      </div>
+      <div id="doneList"></div>
+    </div>
+
+    <!-- EMPTY -->
+    <div class="empty-state" id="listEmpty">
+      <i class="fas fa-cart-shopping"></i>
+      <p>Your list is empty</p>
+      <span>Tap "+ Add New Item" to get started</span>
+    </div>
+
+    <div style="height:90px"></div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bnav">
+    <a href="../mainmenu/mainmenu.html"         class="bnav-item"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html"         class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html" class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html"         class="bnav-item active"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../menumatching/allmenus.html"     class="bnav-item"><i class="fas fa-book-open"></i><span>Recipes</span></a>
+  </nav>
+
+</div>
+
+<!-- ADD MODAL (bottom sheet) -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Add Item</h3>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <div class="ingredient-wrapper">
+      <label class="field-label">Item name</label>
+      <input type="text" id="itemInput" placeholder="e.g. salmon, milk..."
+             oninput="showSuggestions()" autocomplete="off">
+      <div id="suggestionBox" class="suggestion-box"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Quantity</label>
+        <input type="number" id="itemQty" placeholder="1" min="1">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Unit</label>
+        <select id="itemUnit">
+          <option value="pcs">pcs</option>
+          <option value="kg">kg</option>
+          <option value="g">g</option>
+          <option value="L">L</option>
+          <option value="ml">ml</option>
+          <option value="tbsp">tbsp</option>
+          <option value="tsp">tsp</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="addItem()">
+      <i class="fas fa-plus"></i> Add to list
+    </button>
+  </div>
+</div>
+
+<script type="module" src="shoplist.js"></script>
+</body>
+</html>
