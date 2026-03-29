@@ -112,7 +112,7 @@ window.register = async function () {
     await setDoc(doc(db, "users", cred.user.uid), {
       username, email, createdAt: new Date()
     });
-    window.location.href = "../mainmenu/mainmenu.html";
+    window.location.href = "../mainmenu.html";
   } catch (e) {
     const msg = e.code === "auth/email-already-in-use"
       ? "This email is already registered."

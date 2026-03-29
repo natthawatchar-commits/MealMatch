@@ -93,7 +93,7 @@ window.login = async function () {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "../mainmenu/mainmenu.html";
+    window.location.href = "../mainmenu.html";
   } catch (e) {
     errMsg.textContent = "Incorrect email or password. Please try again.";
     btn.disabled = false;
