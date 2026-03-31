@@ -34,6 +34,7 @@ function showGuestNotice() {
 window.openModal = function() {
   if(!currentUser){showLoginPrompt();return;}
   document.getElementById("modal").classList.add("open");
+  
 };
 window.closeModal = function() {
   document.getElementById("modal").classList.remove("open");
@@ -99,6 +100,7 @@ window.openItemModal=function(index){
   document.getElementById("popupName").textContent=item.name;
   document.getElementById("popupQty").value=item.qty;
   document.getElementById("popupUnit").textContent=item.unit;
+  document.getElementById("popupExpire").value = item.expire || "";
   document.getElementById("itemModal").classList.add("open");
 };
 window.closeItemModal=async function(){
@@ -169,3 +171,16 @@ function showLoginPrompt(){
   o.addEventListener("click",e=>{if(e.target===o)o.remove();});
   document.body.appendChild(o);
 }
+window.updateExpire = async function(){
+  if(currentIndex===null) return;
+
+  const value = document.getElementById("popupExpire").value;
+  const item = items[currentIndex];
+
+  await updateDoc(
+    doc(db,"users",currentUser.uid,"ingredients",item.id),
+    { expire: value || null }
+  );
+
+  loadItems();
+};
