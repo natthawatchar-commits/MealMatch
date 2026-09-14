@@ -65,18 +65,36 @@ body {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
 }
 .menu-card:hover { transform: translateY(-2px); box-shadow: var(--sh-md); }
 
 .menu-card img {
-  width: 100%; aspect-ratio: 1;
-  object-fit: cover; display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0; /* ป้องกันไม่ให้รูปโดนบีบขนาด */
 }
 
 .menu-name {
-  font-size: 11px; font-weight: 600;
-  color: var(--text); padding: 7px 8px 8px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 7px 8px 8px;
+  
+  /* ล็อกความสูงกล่องข้อความ ให้ทุกการ์ดมีขนาดพื้นที่ชื่อเท่ากันเสมอ */
+  height: 38px;
+  line-height: 1.2;
+  
+  /* รองรับการแสดงผลสูงสุด 2 บรรทัด หากยาวเกินจะตัดด้วย ... */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .load-more-btn {

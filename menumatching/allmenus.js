@@ -1,49 +1,49 @@
-// Browse — no login required
-const API_SEARCH = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+// allmenus.js — แสดงรายการเมนูอาหารไทยทั้งหมด
 let meals = [], filtered = [], visibleCount = 30;
 
-loadAllMenus();
+document.addEventListener("DOMContentLoaded", () => {
+  loadAllMenus();
+});
 
-async function loadAllMenus() {
+function loadAllMenus() {
   const grid = document.getElementById("menuList");
-  grid.innerHTML = `<div class="state-box"><i class="fas fa-spinner fa-spin"></i>Loading recipes...</div>`;
+  grid.innerHTML = `<div class="state-box"><i class="fas fa-spinner fa-spin"></i>กำลังโหลดเมนู...</div>`;
 
-  const cached = localStorage.getItem("allMeals");
-  if (cached) {
-    meals = filtered = JSON.parse(cached);
-    document.getElementById("browseSub").textContent = `${meals.length} recipes`;
-    renderGrid(); return;
-  }
-
-  let all = [];
-  for (const l of "abcdefghijklmnopqrstuvwxyz".split("")) {
-    try { const r = await fetch(API_SEARCH + l); const d = await r.json(); if (d.meals) all = all.concat(d.meals); } catch(e){}
-  }
-  const seen = new Set();
-  meals = all.filter(m => { if(seen.has(m.idMeal)) return false; seen.add(m.idMeal); return true; });
-  localStorage.setItem("allMeals", JSON.stringify(meals));
-  filtered = meals;
-  document.getElementById("browseSub").textContent = `${meals.length} recipes`;
+  // อ่านข้อมูลจาก THAI_MEALS ที่เตรียมไว้
+  meals = filtered = window.THAI_MEALS || [];
+  
+  document.getElementById("browseSub").textContent = `${meals.length} เมนู`;
   renderGrid();
 }
 
 function renderGrid() {
   const grid = document.getElementById("menuList");
   grid.innerHTML = "";
-  if (!filtered.length) { grid.innerHTML = `<div class="state-box"><i class="fas fa-search"></i>No recipes found</div>`; document.getElementById("loadMoreWrap").innerHTML = ""; return; }
+  
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="state-box"><i class="fas fa-search"></i>ไม่พบเมนูอาหาร</div>`;
+    document.getElementById("loadMoreWrap").innerHTML = "";
+    return;
+  }
+  
   filtered.slice(0, visibleCount).forEach(meal => {
     const card = document.createElement("div");
     card.className = "menu-card";
     card.onclick = () => { window.location.href = `menudetail.html?id=${meal.idMeal}`; };
-    card.innerHTML = `<img src="${meal.strMealThumb}" alt="${meal.strMeal}" loading="lazy"><p class="menu-name">${meal.strMeal}</p>`;
+    card.innerHTML = `
+      <img src="${meal.strMealThumb}" alt="${meal.strMeal}" loading="lazy">
+      <p class="menu-name">${meal.strMeal}</p>
+    `;
     grid.appendChild(card);
   });
+
   const wrap = document.getElementById("loadMoreWrap");
   wrap.innerHTML = visibleCount < filtered.length
-    ? `<button class="load-more-btn" onclick="loadMore()">Show more <i class="fas fa-chevron-down" style="margin-left:6px;font-size:12px"></i></button>` : "";
+    ? `<button class="load-more-btn" onclick="loadMore()">แสดงเพิ่มเติม <i class="fas fa-chevron-down" style="margin-left:6px;font-size:12px"></i></button>`
+    : "";
 }
 
-window.loadMore   = () => { visibleCount += 30; renderGrid(); };
+window.loadMore = () => { visibleCount += 30; renderGrid(); };
 window.searchMenu = () => {
   const kw = document.getElementById("menuSearch").value.trim().toLowerCase();
   visibleCount = 30;

@@ -21,14 +21,14 @@
     <button class="topbar-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
   </header>
 
-  <!-- HERO CARD (rounded, inside padding) -->
+  <!-- HERO CARD -->
   <div class="hero-wrap">
     <section class="hero-card">
       <div class="hero-bg-blob b1"></div>
       <div class="hero-bg-blob b2"></div>
       <p class="hero-date" id="heroDate"></p>
       <h1 class="hero-greeting" id="heroGreeting">Hello!</h1>
-      <p class="hero-sub"   id="heroSub">Loading...</p>
+      <p class="hero-sub" id="heroSub">Loading...</p>
       <div class="hero-stats">
         <div class="hstat">
           <div class="hstat-n"><span id="statIngredients">0</span><span class="hstat-max">/16</span></div>
@@ -55,12 +55,12 @@
     <section class="block">
       <p class="block-label">MAIN MENU</p>
       <div class="menu-grid">
-        <a href="../myfridge/myfridge.html"          class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-snowflake"></i></div><span>My Fridge</span></a>
-        <a href="../favorite/favorite.html"           class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-bookmark"></i></div><span>Saved</span></a>
-        <a href="../menumatching/menumatching.html"   class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-wand-magic-sparkles"></i></div><span>Discover</span></a>
-        <a href="../inventory/inventory.html"         class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-chart-bar"></i></div><span>Stock</span></a>
-        <a href="../shoplist/shoplist.html"           class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-cart-shopping"></i></div><span>Shopping</span></a>
-        <a href="../menumatching/allmenus.html"       class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-book-open"></i></div><span>Recipes</span></a>
+        <a href="../myfridge/myfridge.html" class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-snowflake"></i></div><span>My Fridge</span></a>
+        <a href="../favorite/favorite.html" class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-bookmark"></i></div><span>Saved</span></a>
+        <a href="../menumatching/menumatching.html" class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-wand-magic-sparkles"></i></div><span>Discover</span></a>
+        <a href="../inventory/inventory.html" class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-chart-bar"></i></div><span>Stock</span></a>
+        <a href="../shoplist/shoplist.html" class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-cart-shopping"></i></div><span>Shopping</span></a>
+        <a href="../menumatching/allmenus.html" class="mgrid-item"><div class="mgrid-icon"><i class="fas fa-book-open"></i></div><span>Recipes</span></a>
       </div>
     </section>
 
@@ -79,7 +79,7 @@
     <section class="block">
       <p class="block-label">QUICK ACCESS</p>
       <div class="qa-grid">
-        <a href="../myfridge/myfridge.html"        class="qa-card qa-blue">
+        <a href="../myfridge/myfridge.html" class="qa-card qa-blue">
           <div class="qa-icon"><i class="fas fa-plus"></i></div>
           <div><p class="qa-title">Add Ingredient</p><p class="qa-sub" id="fridgeSlots">0/16 slots used</p></div>
         </a>
@@ -87,11 +87,11 @@
           <div class="qa-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
           <div><p class="qa-title">What to Cook?</p><p class="qa-sub">Match from your fridge</p></div>
         </a>
-        <a href="../shoplist/shoplist.html"         class="qa-card qa-green">
+        <a href="../shoplist/shoplist.html" class="qa-card qa-green">
           <div class="qa-icon"><i class="fas fa-clipboard-list"></i></div>
           <div><p class="qa-title">Buy List</p><p class="qa-sub" id="shopCount">0 items pending</p></div>
         </a>
-        <a href="../inventory/inventory.html"       class="qa-card qa-purple">
+        <a href="../inventory/inventory.html" class="qa-card qa-purple">
           <div class="qa-icon"><i class="fas fa-triangle-exclamation"></i></div>
           <div><p class="qa-title">Check Expiry</p><p class="qa-sub" id="inventoryCount">0 items tracked</p></div>
         </a>
@@ -109,15 +109,18 @@
 
   <!-- BOTTOM NAV -->
   <nav class="bnav">
-    <a href="../mainmenu/mainmenu.html"          class="bnav-item active"><i class="fas fa-house"></i><span>Home</span></a>
-    <a href="../myfridge/myfridge.html"          class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
-    <a href="../menumatching/menumatching.html"  class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
-    <a href="../shoplist/shoplist.html"          class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
-    <a href="../mainmenu/more.html"              class="bnav-item"><i class="fas fa-ellipsis"></i><span>More</span></a>
+    <a href="../mainmenu/mainmenu.html" class="bnav-item active"><i class="fas fa-house"></i><span>Home</span></a>
+    <a href="../myfridge/myfridge.html" class="bnav-item"><i class="fas fa-snowflake"></i><span>Fridge</span></a>
+    <a href="../menumatching/menumatching.html" class="bnav-item"><i class="fas fa-utensils"></i><span>Match</span></a>
+    <a href="../shoplist/shoplist.html" class="bnav-item"><i class="fas fa-cart-shopping"></i><span>Shopping</span></a>
+    <a href="../mainmenu/more.html" class="bnav-item"><i class="fas fa-ellipsis"></i><span>More</span></a>
   </nav>
 
-</div><!-- end app-shell -->
+</div>
 
+<!-- โหลดไฟล์ข้อมูลภาษาไทย และไฟล์แมปภาษาก่อน script หลัก -->
+<script src="../menumatching/thaimeals.js"></script>
+<script src="../ingredientMap.js"></script>
 <script type="module" src="mainmenu.js"></script>
 </body>
 </html>

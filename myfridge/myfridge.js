@@ -10,6 +10,38 @@ const db   = getFirestore(app);
 let currentUser=null, items=[], currentIndex=null;
 const MAX_SLOTS=16;
 
+/* ── THAI TO ENGLISH MAPPING FOR IMAGES ── */
+const THAI_ING_MAP = {
+  // Thai -> English
+  "ไก่": "chicken", "หมู": "pork", "เนื้อวัว": "beef", "กุ้ง": "shrimp", "ปลา": "fish",
+  "ไข่": "egg", "ไข่ไก่": "egg", "น้ำปลา": "fish sauce", "พริก": "chili", "กระเทียม": "garlic",
+  "กะเพรา": "basil", "มะนาว": "lime", "หอมใหญ่": "onion", "หอมแดง": "shallot", "น้ำมันพืช": "oil",
+  "น้ำตาล": "sugar", "เกลือ": "salt", "หมูกรอบ": "pork belly", "คะน้า": "kale", "เต้าหู้": "tofu",
+  "เห็ด": "mushroom", "ต้นหอม": "spring onion", "ผักชี": "coriander", "มะเขือเทศ": "tomato"
+};
+
+function getImgUrl(name) {
+  if (!name) return "https://cdn-icons-png.flaticon.com/512/1046/1046857.png";
+  
+  // แปลงเป็นอักษรพิมพ์เล็กและตัดช่องว่างหัวท้าย
+  const clean = name.trim().toLowerCase();
+  
+  // 1. ถ้ามีใน Dictionary แปลงเป็นอังกฤษ
+  let engName = THAI_ING_MAP[clean] || clean;
+  
+  // 2. จัดการคำภาษาอังกฤษแบบพหูพจน์ให้กลับเป็นเอกพจน์เพื่อให้ตรงกับ API รูปภาพ
+  if (engName.endsWith("s") && !["chili", "basil", "fish sauce"].includes(engName)) {
+    if (engName === "chillies") engName = "chili";
+    else if (engName === "onions") engName = "onion";
+    else if (engName === "eggs") engName = "egg";
+  }
+
+  // 3. ปรับตัวอักษรแรกให้เป็นตัวใหญ่ (เช่น chicken -> Chicken) เพื่อให้ตรงกับ API ของ TheMealDB
+  const formattedName = engName.charAt(0).toUpperCase() + engName.slice(1);
+
+  return `https://www.themealdb.com/images/ingredients/${encodeURIComponent(formattedName)}.png`;
+}
+
 /* ── AUTH — no redirect, just track user ── */
 onAuthStateChanged(auth, (user) => {
   currentUser = user;
@@ -34,8 +66,8 @@ function showGuestNotice() {
 window.openModal = function() {
   if(!currentUser){showLoginPrompt();return;}
   document.getElementById("modal").classList.add("open");
-  
 };
+
 window.closeModal = function() {
   document.getElementById("modal").classList.remove("open");
   document.getElementById("itemName").value="";
@@ -67,7 +99,7 @@ function renderGrid() {
     const slot=document.createElement("div");
     const cls=getExpireClass(item.expire); slot.className=`fridge-slot ${cls}`;
     slot.onclick=()=>openItemModal(index);
-    slot.innerHTML=`<div class="slot-expire-dot"></div><img class="slot-img" src="https://www.themealdb.com/images/ingredients/${item.name}.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png'"><p class="slot-name">${item.name}</p><p class="slot-qty">${item.qty} ${item.unit}</p>`;
+    slot.innerHTML=`<div class="slot-expire-dot"></div><img class="slot-img" src="${getImgUrl(item.name)}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png'"><p class="slot-name">${item.name}</p><p class="slot-qty">${item.qty} ${item.unit}</p>`;
     grid.appendChild(slot);
   });
   if(items.length<MAX_SLOTS){
@@ -85,7 +117,7 @@ function renderDetailList(data) {
     const cls=getExpireClass(item.expire),badgeText=getExpireBadge(item.expire);
     const expireStr=item.expire?new Date(item.expire).toLocaleDateString("th-TH"):"—";
     const row=document.createElement("div"); row.className=`detail-row ${cls}`; row.onclick=()=>openItemModal(index);
-    row.innerHTML=`<img src="https://www.themealdb.com/images/ingredients/${item.name}.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png'"><div class="dr-info"><p class="dr-name">${item.name}</p><p class="dr-meta">${item.qty} ${item.unit} · expires ${expireStr}</p></div>${badgeText?`<span class="dr-badge ${cls}">${badgeText}</span>`:""}`;
+    row.innerHTML=`<img src="${getImgUrl(item.name)}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png'"><div class="dr-info"><p class="dr-name">${item.name}</p><p class="dr-meta">${item.qty} ${item.unit} · expires ${expireStr}</p></div>${badgeText?`<span class="dr-badge ${cls}">${badgeText}</span>`:""}`;
     container.appendChild(row);
   });
 }
@@ -96,29 +128,33 @@ function getExpireBadge(expire){if(!expire)return null;const d=Math.ceil((new Da
 window.openItemModal=function(index){
   if(!currentUser){showLoginPrompt();return;}
   currentIndex=index; const item=items[index];
-  document.getElementById("popupIcon").innerHTML=`<img src="https://www.themealdb.com/images/ingredients/${item.name}.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png'">`;
+  document.getElementById("popupIcon").innerHTML=`<img src="${getImgUrl(item.name)}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1046/1046857.png'">`;
   document.getElementById("popupName").textContent=item.name;
   document.getElementById("popupQty").value=item.qty;
   document.getElementById("popupUnit").textContent=item.unit;
   document.getElementById("popupExpire").value = item.expire || "";
   document.getElementById("itemModal").classList.add("open");
 };
+
 window.closeItemModal=async function(){
   const value=parseInt(document.getElementById("popupQty").value)||0;
   if(value<=0&&currentIndex!==null){await deleteItem();return;}
   document.getElementById("itemModal").classList.remove("open");
 };
+
 window.adjustQty=async function(amount){
   if(currentIndex===null)return;
   const input=document.getElementById("popupQty");let value=(parseInt(input.value)||0)+amount;if(value<0)value=0;input.value=value;
   const item=items[currentIndex];
   await updateDoc(doc(db,"users",currentUser.uid,"ingredients",item.id),{qty:value});loadItems();
 };
+
 window.updateQtyFromInput=async function(){
   if(currentIndex===null)return;
   const value=parseInt(document.getElementById("popupQty").value)||0;const item=items[currentIndex];
   await updateDoc(doc(db,"users",currentUser.uid,"ingredients",item.id),{qty:value});loadItems();
 };
+
 window.addItem=async function(){
   const name=document.getElementById("itemName").value.toLowerCase().trim();
   const qty=parseInt(document.getElementById("itemQty").value);
@@ -129,13 +165,16 @@ window.addItem=async function(){
   await addDoc(collection(db,"users",currentUser.uid,"ingredients"),{name,qty,unit,expire:expire||null,createdAt:new Date()});
   closeModal();loadItems();
 };
+
 window.deleteItem=async function(){
   if(currentIndex===null)return;
   const item=items[currentIndex];
   await deleteDoc(doc(db,"users",currentUser.uid,"ingredients",item.id));
   document.getElementById("itemModal").classList.remove("open");currentIndex=null;loadItems();
 };
+
 window.goInventory=()=>{window.location.href="../inventory/inventory.html";};
+
 window.filterItems=function(){
   const q=document.getElementById("searchInput").value.toLowerCase();
   renderDetailList(q?items.filter(i=>i.name.toLowerCase().includes(q)):items);
@@ -143,7 +182,16 @@ window.filterItems=function(){
 
 // Autocomplete
 window.ingredientList=[];
-async function loadIngredientList(){try{const r=await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list");const d=await r.json();window.ingredientList=d.meals.map(i=>i.strIngredient.toLowerCase());}catch(e){}}
+async function loadIngredientList(){
+  try{
+    const r=await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list");
+    const d=await r.json();
+    const engList = d.meals.map(i=>i.strIngredient.toLowerCase());
+    const thaiList = Object.keys(THAI_ING_MAP);
+    window.ingredientList = [...thaiList, ...engList];
+  }catch(e){}
+}
+
 window.suggestIngredient=function(){
   const input=document.getElementById("itemName"),box=document.getElementById("ingredientSuggestions"),value=input.value.toLowerCase();
   box.innerHTML="";
@@ -153,7 +201,8 @@ window.suggestIngredient=function(){
   box.style.display="block";
   matches.forEach(name=>{const div=document.createElement("div");div.className="suggestion-item";div.textContent=name;div.onclick=()=>{input.value=name;box.style.display="none";};box.appendChild(div);});
 };
-document.addEventListener("click",e=>{if(!e.target.closest(".ingredient-wrapper"))document.getElementById("ingredientSuggestions").style.display="none";});
+
+document.addEventListener("click",e=>{if(!e.target.closest(".ingredient-wrapper"))document.getElementById("ingredientSuggestions")?.style.setProperty("display", "none");});
 loadIngredientList();
 
 function showLoginPrompt(){
@@ -171,6 +220,7 @@ function showLoginPrompt(){
   o.addEventListener("click",e=>{if(e.target===o)o.remove();});
   document.body.appendChild(o);
 }
+
 window.updateExpire = async function(){
   if(currentIndex===null) return;
 

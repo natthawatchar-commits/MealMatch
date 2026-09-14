@@ -64,12 +64,10 @@ body {
     box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
 }
 
-/* =========================
-   🔥 FIX GRID (สำคัญสุด)
-========================= */
+/* GRID SYSTEM */
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr)); /* บังคับ 3 คอลัม */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
     padding: 15px 10px;
     margin-bottom: 30px;
@@ -86,7 +84,7 @@ body {
     text-align: center;
     font-size: 12px;
     font-weight: 600;
-    min-width: 0; /* กันล้น */
+    min-width: 0;
 }
 
 /* icon */
@@ -196,17 +194,14 @@ ul {
     background: #f7faff;
 }
 
-/* =========================
-   📱 MOBILE FIX
-========================= */
+/* MOBILE */
 @media (max-width: 768px){
-
     .container {
-        padding: 15px 10px; /* ลดจาก 25px */
+        padding: 15px 10px;
     }
 
     .menu-grid {
-        padding: 10px 0; /* เอาด้านข้างออก */
+        padding: 10px 0;
         gap: 10px;
     }
 
@@ -224,36 +219,10 @@ ul {
     }
 }
 
-/* =========================
-   💻 DESKTOP
-========================= */
+/* DESKTOP */
 @media (min-width: 768px){
     .container {
         margin-top: 20px;
         border-radius: 30px;
     }
-}
-
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) !important;
-}
-
-.menu-grid > * {
-    width: 100%;
-}
-
-.menu-item {
-    width: 100%;
-    min-width: 0;
-}
-
-.circle {
-    width: 100%;
-    max-width: 50px;  /* จำกัดไม่ให้ดัน grid */
-    height: 50px;
-}
-
-.menu-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
 }
